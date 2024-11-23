@@ -82,3 +82,13 @@ cell pack_collateral(int asset_type, int amount, int price) inline {
     (slice price_slice, int price_found) = price_feeds.udict_get?(8, asset_type);
     throw_unless(ERROR_INVALID_AMOUNT, price_found);
     int price = price_slice~load_uint(64);
+
+    ;; Calculate the collateral value
+    int new_collateral_value = muldiv(amount, price, 1000000000);  ;; Assume price has 9 decimals
+
+    ;; Load or initialize user's position
+    (slice position_slice, int found) = users.udict_get?(267, sender_key);
+    int collateral_value = 0;
+    int pusd_borrowed = 0;
+    cell collaterals = new_dict();  ;; Properly initialize collaterals as an empty dictionary
+
