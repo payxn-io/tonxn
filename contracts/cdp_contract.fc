@@ -71,3 +71,9 @@ cell pack_collateral(int asset_type, int amount, int price) inline {
         .store_uint(total_pusd_supply, 128)
         .end_cell());
 }
+
+() deposit_collateral(slice sender_address, int asset_type, int amount) impure {
+    throw_if(ERROR_INVALID_AMOUNT, amount <= 0);
+
+    ;; Convert sender address to key
+    int sender_key = slice_hash(sender_address);
