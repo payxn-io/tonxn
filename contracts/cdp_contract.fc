@@ -5,3 +5,10 @@ const int MIN_COLLATERAL_RATIO = 150;  ;; 150% minimum collateral ratio
 const int ERROR_INVALID_AMOUNT = 101;
 const int ERROR_BELOW_MIN_COLLATERAL = 102;
 const int ERROR_UNAUTHORIZED = 103;
+
+;; Asset Types
+const int TON = 1;
+const int DOGS = 2;
+const int BTC = 3;
+const int ETH = 4;
+const int SOL = 5;
