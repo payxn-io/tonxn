@@ -151,3 +151,28 @@ throw_if(ERROR_INVALID_AMOUNT, amount <= 0);
         .end_cell();
     send_raw_message(msg, 1);  ;; Pay transfer fees separately
 }
+
+
+() recv_internal(int msg_value, cell in_msg_full, slice in_msg_body) impure {
+    slice cs = in_msg_full.begin_parse();
+    int flags = cs~load_uint(4);
+    if (flags & 1) {  ;; Ignore bounced messages
+        return ();
+    }
+    slice sender_address = cs~load_msg_addr();
+
+    load_data();
+
+    int op = in_msg_body~load_uint(32);
+
+    if (op == 1) {  ;; Deposit Collateral
+        int asset_type = in_msg_body~load_uint(8);
+        int amount = in_msg_body~load_uint(128);
+        deposit_collateral(sender_address, asset_type, amount);
+    } elseif (op == 2) {  ;; Borrow pUSD
+        int amount = in_msg_body~load_uint(128);
+        borrow_pusd(sender_address, amount);
+    }
+
+    save_data();
+}
