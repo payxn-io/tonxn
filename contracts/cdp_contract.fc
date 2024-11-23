@@ -42,3 +42,32 @@ cell pack_position(int collateral_value, int pusd_borrowed, cell collaterals) in
         .store_dict(collaterals)
         .end_cell();
 }
+
+(int, int, int) unpack_collateral(slice cs) inline {
+    return (cs~load_uint(8),   ;; asset_type
+            cs~load_uint(128), ;; amount
+            cs~load_uint(64)); ;; price
+}
+
+cell pack_collateral(int asset_type, int amount, int price) inline {
+    return begin_cell()
+        .store_uint(asset_type, 8)
+        .store_uint(amount, 128)
+        .store_uint(price, 64)
+        .end_cell();
+}
+
+() load_data() impure {
+    var ds = get_data().begin_parse();
+    users = ds~load_ref();
+    price_feeds = ds~load_ref();
+    total_pusd_supply = ds~load_uint(128);
+}
+
+() save_data() impure {
+    set_data(begin_cell()
+        .store_ref(users)
+        .store_ref(price_feeds)
+        .store_uint(total_pusd_supply, 128)
+        .end_cell());
+}
