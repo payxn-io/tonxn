@@ -92,3 +92,20 @@ cell pack_collateral(int asset_type, int amount, int price) inline {
     int pusd_borrowed = 0;
     cell collaterals = new_dict();  ;; Properly initialize collaterals as an empty dictionary
 
+if (found) {
+        (collateral_value, pusd_borrowed, collaterals) = unpack_position(position_slice);
+    }
+
+    ;; Update collateral value
+    collateral_value += new_collateral_value;
+
+    ;; Update or add the asset to the collateral dictionary
+    (slice collateral_slice, int collateral_found) = collaterals.udict_get?(8, asset_type);
+    int current_amount = 0;
+    if (collateral_found) {
+        (_, current_amount, _) = unpack_collateral(collateral_slice);
+    }
+    int updated_amount = current_amount + amount;
+
+    cell updated_collateral = pack_collateral(asset_type, updated_amount, price);
+    collaterals~udict_set(8, asset_type, updated_collateral.begin_parse());
