@@ -9,6 +9,6 @@
 -Vault deposits thus receive pUSD yield and collateral-denominated liquidation profits, with further automation of compounding liquidation proceeds possible.
 -On-Chain Savings: pUSD can be redeemed for $1-worth of protocol collateral and has zero off-chain dependencies.
 -This allows it to serve as a stable store of value for as long as the TON network remains operational. 
-
 ```
+-𝚍𝚎𝚖𝚘 𝚐𝚒𝚏-
 
