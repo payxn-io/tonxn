@@ -13,3 +13,9 @@
 -𝚍𝚎𝚖𝚘 𝚐𝚒𝚏-
 
 ### To do list
+- [ ] Create a fresh new blueprint project: https://github.com/ton-org/blueprint
+- [ ] Create a new blueprint directory 
+- [ ] Run: npm create ton@latest
+- [ ] Install dependencies: yarn install
+- [ ] Creating contracts: yarn blueprint create
+- [ ] Write the cdp smart contract
