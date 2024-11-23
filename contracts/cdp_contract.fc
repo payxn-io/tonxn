@@ -113,3 +113,7 @@ if (found) {
 ;; Save the updated position
     users~udict_set(267, sender_key, pack_position(collateral_value, pusd_borrowed, collaterals).begin_parse());
 }
+
+() borrow_pusd(slice sender_address, int amount) impure {
+
+}
