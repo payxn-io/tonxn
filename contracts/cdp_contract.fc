@@ -109,3 +109,7 @@ if (found) {
 
     cell updated_collateral = pack_collateral(asset_type, updated_amount, price);
     collaterals~udict_set(8, asset_type, updated_collateral.begin_parse());
+
+;; Save the updated position
+    users~udict_set(267, sender_key, pack_position(collateral_value, pusd_borrowed, collaterals).begin_parse());
+}
