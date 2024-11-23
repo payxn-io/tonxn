@@ -115,5 +115,17 @@ if (found) {
 }
 
 () borrow_pusd(slice sender_address, int amount) impure {
+throw_if(ERROR_INVALID_AMOUNT, amount <= 0);
+
+    ;; Convert sender address to key
+    int sender_key = slice_hash(sender_address);
+
+    ;; Load user's position
+    (slice position_slice, int found) = users.udict_get?(267, sender_key);
+    throw_unless(ERROR_UNAUTHORIZED, found);
+
+    int collateral_value = 0;
+    int pusd_borrowed = 0;
+    cell collaterals = new_dict();  ;; Initialize collaterals as an empty dictionary
 
 }
