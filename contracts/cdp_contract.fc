@@ -20,3 +20,10 @@ global int total_pusd_supply;
 
 ;; Storage TL-B
 ;; UserPosition: (collateral_value:int, pusd_borrowed:int, collaterals:dict)
+
+
+;; Function Declarations
+() load_data() impure;
+() save_data() impure;
+() deposit_collateral(slice sender_address, int asset_type, int amount) impure;
+() borrow_pusd(slice sender_address, int amount) impure;
