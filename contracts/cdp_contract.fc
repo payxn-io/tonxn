@@ -12,3 +12,11 @@ const int DOGS = 2;
 const int BTC = 3;
 const int ETH = 4;
 const int SOL = 5;
+
+;; Storage
+global cell users;        ;; Dictionary<addr_std, UserPosition>
+global cell price_feeds;  ;; Dictionary<int, int>
+global int total_pusd_supply;
+
+;; Storage TL-B
+;; UserPosition: (collateral_value:int, pusd_borrowed:int, collaterals:dict)
