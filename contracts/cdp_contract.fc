@@ -27,3 +27,18 @@ global int total_pusd_supply;
 () save_data() impure;
 () deposit_collateral(slice sender_address, int asset_type, int amount) impure;
 () borrow_pusd(slice sender_address, int amount) impure;
+
+;; Helper Functions
+(int, int, cell) unpack_position(slice cs) inline {
+    return (cs~load_uint(128),  ;; collateral_value
+            cs~load_uint(128),  ;; pusd_borrowed
+            cs~load_dict());    ;; collaterals
+}
+
+cell pack_position(int collateral_value, int pusd_borrowed, cell collaterals) inline {
+    return begin_cell()
+        .store_uint(collateral_value, 128)
+        .store_uint(pusd_borrowed, 128)
+        .store_dict(collaterals)
+        .end_cell();
+}
