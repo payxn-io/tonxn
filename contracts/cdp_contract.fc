@@ -77,3 +77,8 @@ cell pack_collateral(int asset_type, int amount, int price) inline {
 
     ;; Convert sender address to key
     int sender_key = slice_hash(sender_address);
+
+    ;; Fetch the price of the asset
+    (slice price_slice, int price_found) = price_feeds.udict_get?(8, asset_type);
+    throw_unless(ERROR_INVALID_AMOUNT, price_found);
+    int price = price_slice~load_uint(64);
