@@ -128,4 +128,15 @@ throw_if(ERROR_INVALID_AMOUNT, amount <= 0);
     int pusd_borrowed = 0;
     cell collaterals = new_dict();  ;; Initialize collaterals as an empty dictionary
 
+    (collateral_value, pusd_borrowed, collaterals) = unpack_position(position_slice);
+
+    ;; Check if the user has enough collateral to mint pUSD
+    int new_borrowed = pusd_borrowed + amount;
+    int collateral_ratio = muldiv(collateral_value, 100, new_borrowed);
+    throw_if(ERROR_BELOW_MIN_COLLATERAL, collateral_ratio < MIN_COLLATERAL_RATIO);
+
+    ;; Update the user's position
+    pusd_borrowed = new_borrowed;
+    users~udict_set(267, sender_key, pack_position(collateral_value, pusd_borrowed, collaterals).begin_parse());
+
 }
