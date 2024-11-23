@@ -139,4 +139,15 @@ throw_if(ERROR_INVALID_AMOUNT, amount <= 0);
     pusd_borrowed = new_borrowed;
     users~udict_set(267, sender_key, pack_position(collateral_value, pusd_borrowed, collaterals).begin_parse());
 
+    ;; Mint the pUSD
+    total_pusd_supply += amount;
+
+    ;; Send the minted pUSD to the user
+    var msg = begin_cell()
+        .store_uint(0x10, 6)  ;; Operation type: Transfer
+        .store_slice(sender_address)
+        .store_coins(amount)
+        .store_uint(0, 1 + 4 + 4 + 64 + 32 + 1 + 1)
+        .end_cell();
+    send_raw_message(msg, 1);  ;; Pay transfer fees separately
 }
