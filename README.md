@@ -13,7 +13,7 @@ Tonxn is a decentralized lending and borrowing platform built on the TON blockch
 -On-Chain Savings: pUSD can be redeemed for $1-worth of protocol collateral and has zero off-chain dependencies.
 -This allows it to serve as a stable store of value for as long as the TON network remains operational. 
 ```
--𝚍𝚎𝚖𝚘 𝚐𝚒𝚏-
+Mainnet is deployed here: https://tonscan.org/address/EQCw5CzDt767ZLwm4_sdW7mc2xsele2Vf8cU77S9XaySLZvQ#source
 
 ### To do list
 - [ ] Create a fresh new blueprint project: https://github.com/ton-org/blueprint
